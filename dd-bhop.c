@@ -76,6 +76,7 @@ static int load_config(const char *path, struct cfg *c) {
 		*eq = 0;
 		char *k = line, *v = eq+1;
 		while (*v==' ') v++;
+		{ char *e=k+strlen(k); while(e>k&&*(e-1)==' ')*--e=0; }
 		#define C(kname, field, parse, T) \
 			if(strcmp(k,kname)==0){T t;if(parse(v,&t)==0){c->field=t;n++;}continue;}
 		C("off_globals", off_globals, parse_ulong, unsigned long)
